@@ -37,7 +37,7 @@ spec:
     ## will be propagated to the Che components and provide particular configuration for Git.
     gitSelfSignedCert: false
     # TLS mode for Che. Make sure you either have public cert, or set selfSignedCert to true
-    tlsSupport: false
+    tlsSupport: true
     # protocol+hostname of a proxy server. Automatically added as JAVA_OPTS and https(s)_proxy
     # to Che server and workspaces containers
     proxyURL: ''
@@ -57,6 +57,7 @@ spec:
     workspaceNamespaceDefault: ''
     # defines if user is able to specify namespace different from the default
     allowUserDefinedWorkspaceNamespaces: false
+    
   database:
     # when set to true, the operator skips deploying Postgres, and passes connection details of existing DB to Che server
     # otherwise a Postgres deployment is created
@@ -73,6 +74,7 @@ spec:
     chePostgresDb: ''
     # Postgres deployment in format image:tag. Defaults to registry.redhat.io/rhscl/postgresql-96-rhel7 (see pkg/deploy/defaults.go for latest tag)
     postgresImage: ''
+    
   storage:
     # persistent volume claim strategy for Che server. Can be common (all workspaces PVCs in one volume),
     # per-workspace (one PVC per workspace for all declared volumes) and unique (one PVC per declared volume). Defaults to common
@@ -112,6 +114,23 @@ spec:
     oAuthSecret: ''
     # image:tag used in Keycloak deployment
     identityProviderImage: ''
+    
+  k8s:
+    # your global ingress domain
+    ingressDomain: '192.168.99.101.nip.io'
+    # kubernetes.io/ingress.class, defaults to nginx
+    ingressClass: ''
+    # IngressStrategy is the way ingresses are created.
+    # Can be multi-host (host is explicitly provided in ingress, <ingress-name>-<namespace>.<global-ingress-domain>),
+    # single-host (host is provided, path based rules, <ingress-domain>/path) and default-host *(no host is provided, path based rules)
+    ingressStrategy: ''
+    # secret name used for tls termination
+    tlsSecretName: ''
+    # FSGroup the Che POD and Workspace pod containers should run in
+    securityContextFsGroup: ''
+    # User the Che POD and Workspace pod containers should run as
+    securityContextRunAsUser: ''
+    
   metrics:
     # Enables '/metrics' endpoint of Che server.
     enable: false
