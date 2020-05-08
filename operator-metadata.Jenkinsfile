@@ -209,7 +209,7 @@ if [[ ${hasChanged} -eq 1 ]]; then
     # do NOT append -rhel8 suffix here: metadata image is os-agnostic
     QUAY_REPO_PATH=""; if [[ ''' + PUSH_TO_QUAY + ''' == "true" ]]; then QUAY_REPO_PATH="${QRP}"; fi
     curl \
-"https://codeready-workspaces-jenkins.rhev-ci-vms.eng.rdu2.redhat.com/job/get-sources-rhpkg-container-build/buildWithParameters?\
+"https://codeready-workspaces-jenkins.rhev-ci-vms.eng.rdu2.redhat.com/job/get-sources-rhpkg-container-build_2.1/buildWithParameters?\
 token=CI_BUILD&\
 cause=${QUAY_REPO_PATH}+respin+by+${BUILD_TAG}&\
 GIT_BRANCH=''' + GIT_BRANCH + '''&\
