@@ -210,8 +210,6 @@ for CSVFILE in ${TARGETDIR}/manifests/codeready-workspaces.csv.yaml; do
 	# insert missing cheFlavor annotation
 	if [[ ! $(grep -E '"cheFlavor": "codeready",' "${CSVFILE}") ]]; then
 		sed 's|"cheFlavor":.*|"cheFlavor": "codeready",|' -i "${CSVFILE}
-		sed -r '/.*"cheImageTag": ".*",/a \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "cheFlavor": "codeready",' \
-			-i "${CSVFILE}"
 	fi
 	if [[ $(diff -u "${SOURCE_CSVFILE}" "${CSVFILE}") ]]; then
 		echo "[INFO] ${0##*/} :: Converted (sed) ${CSVFILE}"
